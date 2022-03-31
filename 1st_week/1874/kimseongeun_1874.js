@@ -4,10 +4,11 @@ var cases = input[0]; //개수 배열의 크기
 var arr = [];//배열을 넣어줄 친구
 var stack = [];
 var answer = '';
+
 for(var i=0; i<cases; i++){
     arr[i] = i+1;
 }
-for(var j=1; j<=cases; j++){ //4
+for(var j=1; j<=cases; j++){
     var count = 1;
     while(count <= cases && stack[stack.length-1] !== input[j]){
         stack.push(arr.shift()); //stack의 마지막 값이 input[j]값과 같지않다면 arr에 있는 요소를 계속 stack에 push
