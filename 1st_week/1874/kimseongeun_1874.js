@@ -1,20 +1,22 @@
 var fs = require('fs');
 var input = fs.readFileSync('/dev/stdin').toString().split('\n');
-var cases = input[0];
-var arr = [];
+var cases = input[0]; //개수 배열의 크기
+var arr = [];//배열을 넣어줄 친구
 var stack = [];
 var answer = '';
+
 for(var i=0; i<cases; i++){
     arr[i] = i+1;
 }
-for(var j=1; j<=cases; j++){ //4
+for(var j=1; j<=cases; j++){
     var count = 1;
-    while(count <= cases && stack[stack.length-1] != input[j]){
-        stack.push(arr.shift());
+    while(count <= cases && stack[stack.length-1] !== input[j]){
+        stack.push(arr.shift()); //stack의 마지막 값이 input[j]값과 같지않다면 arr에 있는 요소를 계속 stack에 push
+        //arr에서 첫번째 요소를 빼서 stack에 넣음 arr에는 첫번째 요소가 사라진 상태
         answer += '+\n';
         count++;
     }
-    if(stack[stack.length-1] == input[j]){
+    if(stack[stack.length-1] === input[j]){
         stack.pop();
         answer += '-\n';
     }else{
