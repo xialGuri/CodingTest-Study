@@ -1,64 +1,32 @@
-const filePath = process.platform === 'linux' ? 'dev/stdin' : './input.txt';
-const input = require('fs').readFileSync(filePath).toString();
+// const filePath = process.platform === 'linux' ? 'dev/stdin' : './input.txt';
+// const input = require('fs').readFileSync(filePath).toString();
+//
+// const N = Number(input);
+const n=6;
+// const n = Number(require('fs').readFileSync('dev/stdin'));
+const solution = (n) => {
+    const binArr = n.toString(2).split("");
+    //n보다 작은 2^x 값 빼기
+    binArr.shift();
+    const answer = parseInt(binArr.join(""), 2);
 
-const N = Number(input);
-
-class Node {
-    constructor(val) {
-        this.val = val;
-        this.next = null;
-        this.prev = null;
-    }
+    return answer ? answer * 2 : n;
 }
+console.log(solution(n));
 
-// LinkedList 클래스 설정
-class LinkedList {
-    constructor() {
-        this.head = null;
-        this.tail = null;
-        this.length = 0;
-    }
+/**
+ * n       answer     role
+ * 1            1       1
+ * 1,2          2           2
+ * 1,2,3        2         (3-2)*2
+ * 1,2,3,4      4        4
+ * 1,2,3,4,5    2        (5-4)*2
+ * 1,2,3,4,5,6  4        (6-4)*2
+ *                      (7-4)*2
+ *                      8
+ *                      (9-8)*2
+ *
+ * n이  2제곱일 경우 값이 n
+ * (n-(n보다 작은 2의 제곱)) *2
+ * **/
 
-    push(val) {
-        const newNode = new Node(val);
-
-        if (!this.head) {
-            this.head = newNode;
-        } else {
-            this.tail.next = newNode;
-            newNode.prev = this.tail;
-        }
-
-        this.tail = newNode;
-        this.length++;
-
-        return newNode;
-    }
-
-    getHead() { // 첫 노드(head) 가져오기
-        return this.head.val;
-    }
-
-    removeHead() { // 첫 노드(head)를 연결리스트에서 지우기
-        this.head = this.head.next;
-        this.head.prev = null;
-        this.length--;
-    }
-
-    getLength() { // 연결리스트의 길이 알기
-        return this.length;
-    }
-}
-
-const cards = new LinkedList();
-
-for (let i = 1; i <= N; i++) {
-    cards.push(i);
-}
-
-while (cards.getLength() !== 1) { // 길이가 0 이 아니라면.
-    cards.removeHead(); // 맨 앞 노드를 지우고
-    cards.push(cards.getHead()); // 맨 앞 노드를 맨뒤로 붙이고
-    cards.removeHead(); // 다시 맨 앞 노드를 지우고
-}
-console.log(cards.getHead());
