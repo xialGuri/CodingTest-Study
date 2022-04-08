@@ -4,7 +4,7 @@ const isPrime = (num) => {
     if(num === 1) //1의경우 소수가 아니므로 별도로 조건문을 걸어줬다.
         return false;
     for(var i=2; i<=Math.sqrt(num); i++){
-        if((num%i)==0)
+        if((num%i)===0)
             return false;
         //2부터 num의 제곱근까지의 값으로 나눠서 나누어 떨어지는 것이 있으면 소수가 아닐 것이다.
         //소수는 1과 자기 자신으로만 나눠지니까
