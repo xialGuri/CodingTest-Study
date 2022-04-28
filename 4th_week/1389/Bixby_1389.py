@@ -13,6 +13,7 @@ def bfs(st):
         for i in graph[v]:
             if not visited[i]:
                 queue.append(i)
+                # 방문여부 체크+카운팅
                 visited[i]=visited[v]+1
  #   print(visited)#debug
     return sum(visited)
