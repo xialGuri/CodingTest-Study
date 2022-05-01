@@ -1,0 +1,38 @@
+from collections import deque
+def solution(places):
+    result = []
+    for place in places:
+        check = True
+        for i in range(len(place)):
+            for j in range(len(place[0])):
+                if place[i][j] == "P":
+                    visited = [[0 for t in range(5)] for k in range(5)]
+                    check = BFS(place, visited, i, j)
+                if not check:
+                    break
+            if not check:
+                break
+        result.append(int(check))
+    return result
+
+
+def BFS(place, visited, a, b):
+    queue = deque()
+    queue.append((a,b))
+    visited[a][b] = 1
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
+    while(queue):
+        x, y = queue.popleft()
+        for i in range(4):
+            temp_x = x+dx[i]
+            temp_y = y+dy[i]
+            if not (0 <= temp_x <= 4 and 0 <= temp_y <= 4) or visited[temp_x][temp_y] != 0 or place[temp_x][temp_y] == "X":
+                continue
+            elif place[temp_x][temp_y] == "O":
+                queue.append((temp_x, temp_y))
+                visited[temp_x][temp_y] = visited[x][y] + 1
+            elif place[temp_x][temp_y] == "P" and visited[x][y] < 3 and (temp_x != a or temp_y != b):
+                return False
+    else:
+        return True
