@@ -1,6 +1,6 @@
+import math
+a=[]
 def solution(fees, records):
-    import math
-    a=[]
     d={e[6:10]:0 for e in records}
     for e in records:
         time=int(e[:2])*60+int(e[3:5])
