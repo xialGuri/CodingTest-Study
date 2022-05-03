@@ -1,23 +1,26 @@
+def solution(fees, records):
+    d={e[6:10]:0 for e in records}
+    for e in records:
+        d[e[6:10]]+=(-1 if e[11:]=='IN' else 1)*(int(e[:2])*60+int(e[3:5]))
+    return [(fees[1]-(-max(0,d[n]+1439*(d[n]<1)-fees[0])//fees[2])*fees[3])for n in sorted(d)]
+    #return [기본요금+(max(0,누적주차시간-기본시간)*단위시간*단위요금 for n in 차량번호로 정렬된 누적주차시간들]
+
+'''
 import math
 a=[]
 def solution(fees, records):
     d={e[6:10]:0 for e in records}
     for e in records:
-        time=int(e[:2])*60+int(e[3:5])
-        if e[11:]=='IN':
-            time=-time
-        d[e[6:10]]+=time
-    for k in d.keys():
-        if d[k]<=0:
-            d[k]+=1439
-        d[k]-=fees[0]
-    for carnum in sorted(d):
-        if d[carnum]<=0:
-            a.append(fees[1])
-        else:
-            a.append(fees[1]+math.ceil(d[carnum]/fees[2])*fees[3])
+        H,M,n,INOUT=int(e[:2]),int(e[3:5]),e[6:10],e[11:]
+        d[n]+=(-1 if INOUT=='IN' else 1)*(int(H)*60+int(M))
+        #d[e[6:10]]+=(-1 if e[11:]=='IN' else 1)*(int(e[:2])*60+int(e[3:5]))
+    for n in sorted(d):
+        d[n]+=1439*(d[n]<1)
+        a.append(fees[1]+math.ceil(max(0,d[n]-fees[0])/fees[2])*fees[3])
     return a
 #가독성 내다버린 코드
+'''
+
 '''
 if(1):
     fees=[180, 5000, 10, 600]
@@ -33,6 +36,7 @@ else:
     #[14841]
 
 solution(fees,records)
+print(a)
 '''
 
 '''
