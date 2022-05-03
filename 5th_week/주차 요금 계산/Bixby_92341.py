@@ -1,7 +1,7 @@
 def solution(fees, records):
-    d={e[6:10]:0 for e in records}
-    for e in records:
-        d[e[6:10]]+=(-1 if e[11:]=='IN' else 1)*(int(e[:2])*60+int(e[3:5]))
+    d={}
+    for e in records:d[e[6:10]]=d.get(e[6:10],0)+(-1 if e[11:]=='IN' else 1)*(int(e[:2])*60+int(e[3:5]))
+    #d[차량번호]+=(In이면 -1 OUT이면 1)*(시간*60+분)
     return [(fees[1]-(-max(0,d[n]+1439*(d[n]<1)-fees[0])//fees[2])*fees[3])for n in sorted(d)]
     #return [기본요금+(max(0,누적주차시간-기본시간)*단위시간*단위요금 for n in 차량번호로 정렬된 누적주차시간들]
 
