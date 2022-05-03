@@ -1,46 +1,25 @@
 def solution(fees, records):
     d={}
     for e in records:d[e[6:10]]=d.get(e[6:10],0)+(-1 if e[11:]=='IN' else 1)*(int(e[:2])*60+int(e[3:5]))
-    #d[차량번호]+=(In이면 -1 OUT이면 1)*(시간*60+분)
     return [(fees[1]-(-max(0,d[n]+1439*(d[n]<1)-fees[0])//fees[2])*fees[3])for n in sorted(d)]
+
+    #{차량번호:누적주차시간}형식이 들어갈 딕셔너리 d선언
+    #d[차량번호]+=(In이면 -1 OUT이면 1)*(시간*60+분)
     #return [기본요금+(max(0,누적주차시간-기본시간)*단위시간*단위요금 for n in 차량번호로 정렬된 누적주차시간들]
 
 '''
-import math
-a=[]
-def solution(fees, records):
-    d={e[6:10]:0 for e in records}
-    for e in records:
-        H,M,n,INOUT=int(e[:2]),int(e[3:5]),e[6:10],e[11:]
-        d[n]+=(-1 if INOUT=='IN' else 1)*(int(H)*60+int(M))
-        #d[e[6:10]]+=(-1 if e[11:]=='IN' else 1)*(int(e[:2])*60+int(e[3:5]))
-    for n in sorted(d):
-        d[n]+=1439*(d[n]<1)
-        a.append(fees[1]+math.ceil(max(0,d[n]-fees[0])/fees[2])*fees[3])
-    return a
-#가독성 내다버린 코드
-'''
+"05:34 5961 IN" 형식이므로 
+시간=[:2]
+분=[3:5]
+차량번호=[6:10]
+출차인지 입차인지=[11:]
+로 문자열 슬라이싱 가능함
 
-'''
-if(1):
-    fees=[180, 5000, 10, 600]
-    records = ["05:34 5961 IN", "06:00 0000 IN", "06:34 0000 OUT", "07:59 5961 OUT", "07:59 0148 IN", "18:59 0000 IN", "19:09 0148 OUT", "22:59 5961 IN", "23:00 5961 OUT"]
-    #[14600, 34400, 5000]
-elif 0:
-    fees=[120, 0, 60, 591]
-    records=["16:00 3961 IN","16:00 0202 IN","18:00 3961 OUT","18:00 0202 OUT","23:58 3961 IN"]
-    #[0, 591]
-else:
-    fees=[1, 461, 1, 10]
-    records=["00:00 1234 IN"]
-    #[14841]
+IN이면 -시간 OUT이면 +시간을 해준다.
+다 계산하고 나서 시간이 -이면 출차기록이 없다는 의미이다.
+이때는 1439를 더해준다(1439는 23:59를 분으로 환산한 값임) 그럼 누적 주차시간이 완성된다.
 
-solution(fees,records)
-print(a)
-'''
-
-'''
-records[:5] - records[:2],records[3:5]
-records[6:10]
-records[11:]
+max(0,누적주차시간-기본시간)를 해서 식에 넣는다.
+(기본시간보다 적게 주차했으면 0이 선택될것이고 더 오래 주차했으면 기본시간을 뺀 시간이 선택된다)
+(0을 곱하면 뒤의 식이 모두 0이 되므로 기본요금만 반환된다.)
 '''
