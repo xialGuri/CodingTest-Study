@@ -1,38 +1,42 @@
+# 현재 노드에서 어떤 노드를 갈 수 있는지 탐색
+def getCanGoEdges(i, prev, graph):
+    # i : 현재 위치, prev : 직전 노드 기준 갈 수 있는 노드, graph : 노드 간 연결 상태
+    canGoEdges = [edge for edge in prev if edge != i]
+
+    for j in range(len(graph)):
+        if graph[i][j] == True:
+            canGoEdges.append(j)
+
+    return canGoEdges
+
+# 현재 위치 i 기준으로 갈 수 있는 곳 탐색해서 양과 늑대의 수를 갱신
+def dfs(i, s, w, prev, graph, info):
+    global answer
+    canGoEdges = getCanGoEdges(i, prev, graph)
+
+    if s == w or not canGoEdges: # 종료 조건 : 양과 늑대의 개수가 같은 경우, 갈 수 있는 노드가 없는 경우 함수를 종료
+        if answer < s:
+            answer = s
+        return
+
+    for edge in canGoEdges:
+        if info[edge] == 0: # 가려는 노드에 양이 있는 경우
+            dfs(edge, s + 1, w, canGoEdges, graph, info)
+        else: # 가려는 노드에 늑대가 있는 경우
+            dfs(edge, s, w + 1, canGoEdges, graph, info)
+
+
 def solution(info, edges):
-    def nextNodes(v):
-        temp = list()
+    global answer
+    answer = 1
+    graph = [[False] * len(info) for _ in range(len(info))]
 
-        for e in edges:
-            i, j = e # i는 부모노드, j는 자식노드
-            if v == i: # 부모노드의 번호를 비교
-                temp.append(j)
+    for x, y in edges:
+        graph[x][y] = True
 
-        return temp
-
-    def dfs(sheep, wolf, current, path): # 지금 노드를 확인, 양과 늑대 판별
-        if info[current]:
-            wolf += 1
-        else:
-            sheep += 1
-
-        if sheep <= wolf: # 늑대가 양을 다 잡아먹어서 바로 0 리턴
-            return 0
-
-        maxSheep = sheep # 아니면 임시 변수에 값 갱신
-
-        for p in path: # 탐색 시작
-            for n in nextNodes(p):
-                if n not in path:
-                    path.append(n)
-                    maxSheep = max(maxSheep, dfs(sheep, wolf, n, path)) # 최대 양 판별
-                    path.pop()
-
-        return maxSheep
-
-    answer = dfs(0, 0, 0, [0])
+    dfs(0, 1, 0, [0], graph, info)
 
     return answer
-
 
 
 print(solution([0,0,1,1,1,0,1,0,1,0,1,1],
