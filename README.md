@@ -11,7 +11,7 @@
 * push 전 fetch & pull 하고 푸쉬하기
 * 폴더 구조는 다음과 같다.
     * 주차별 폴더 - 문제 폴더 - 문제 소스코드 파일
-        * 예) ```1st_week```폴더 -> ```1000``` 폴더 -> ```kodongcheon.py``` 
+        * 예) ```1주차```폴더 -> ```1000``` 폴더 -> ```kodongcheon.py``` 
 * 소스코드 파일은 누구 파일인지 알아볼 수 있게 작성
 * 커밋 내용은 자유롭게
 
@@ -24,3 +24,4 @@
 |3주차(04.08~04.14)|[벌집](https://www.acmicpc.net/problem/2292)|[최대공약수와 최소공배수](https://www.acmicpc.net/problem/2609)|[피보나치 함수](https://www.acmicpc.net/problem/1003)|[유기농 배추](https://www.acmicpc.net/problem/1012)|[Z](https://www.acmicpc.net/problem/1074)|[리모컨](https://www.acmicpc.net/problem/1107)|[DFS와BFS](https://www.acmicpc.net/problem/1260)|
 |4주차(04.22~04.28)|[케빈 베이컨의 6단계 법칙](https://www.acmicpc.net/problem/1389)|[1로 만들기](https://www.acmicpc.net/problem/1463)|[잃어버린 괄호](https://www.acmicpc.net/problem/1541)|[나는야 포켓몬 마스터 이다솜](https://www.acmicpc.net/problem/1620)|[팩토리얼 0의 개수](https://www.acmicpc.net/problem/1676)|[숨바꼭질](https://www.acmicpc.net/problem/1697)|[듣보잡](https://www.acmicpc.net/problem/1764)|
 |5주차(04.29~05.05)|카|카|오|문|제|풀|기|
+|6주차(05.06~05.12)|[종이의 개수](https://www.acmicpc.net/problem/1780)|[최소 힙](https://www.acmicpc.net/problem/1927)|[회의실 배정](https://www.acmicpc.net/problem/1931)|[쿼드트리](https://www.acmicpc.net/problem/1992)|[미로 탐색](https://www.acmicpc.net/problem/2178)|[계단 오르기](https://www.acmicpc.net/problem/2579)|[바이러스](https://www.acmicpc.net/problem/2606)|
