@@ -10,7 +10,7 @@ def dp(r,c,n):
                    for l in range(3):
                        dp(r+k*n, c+l*n, n) #잘린 9개 모두 재귀 호출
                 return
-    paperNumber[startWith+1]+=1
+    paperNumber[startWith+1]+=1 # 모두 같은 숫자라면 인덱스를 그숫자+1 로 하고 +1 해준다
     return
 
 n=int(input())
