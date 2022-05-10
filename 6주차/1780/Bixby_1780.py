@@ -4,7 +4,7 @@ def dp(r,c,n):
     for i in range(r,r+n):
         for j in range(c,c+n):
             if paper[i][j]!=startWith: #같은숫자로 구성되지 않았으면
-                n//=3 #9등분하기 위해 size//3
+                n//=3 #9등분하기 위해 n//3
 
                 for k in range(3):
                    for l in range(3):
