@@ -9,20 +9,33 @@
 //     .map((el) => el.split(" ").map((el) => Number(el)));
 let N=9;
 let arr=[N][N];
-arr=[[0,0,0,1,1,1,-1,-1,-1],[0,0,0,1,1,1,-1,-1,-1],
+paper=[[0,0,0,0,0,0,0,0],[0,0,0,1,1,1,-1,-1,-1],
     [0,0,0,1,1,1,-1,-1,-1],[1,1,1,0,0,0,0,0,0],[1,1,1,0,0,0,0,0,0],
     [1,1,1,0,0,0,0,0,0],[0,1,-1,0,1,-1,0,1,-1],[0,-1,1,0,-1,1,0,-1,1],[0,1,-1,1,0,-1,0,1,-1]];
 
-function solution(arr){
-    const isBelowThreshold = (currentValue) => currentValue === 0;
-    const t=[-1,0,1];
-    for(i in t){
-        i
+const countPaper = n => {
+    const count = [0, 0, 0];
+    const recursion = (n, x, y) => {
+        const num = paper[y][x];
+        let numCount = 0;
+        for (let i=0; i<n; i++) {
+            for (let j=0; j<n; j++) {
+                if (paper[y+j][x+i] === num) numCount++;
+                else break;
+            }
+        }
+        if (numCount === n*n) count[num+1]++;
+        else {
+            n /= 3;
+            for (let i=0; i<3; i++) {
+                for (let j=0; j<3; j++) {
+                    recursion(n, x+i*n, y+j*n);
+                }
+            }
+        }
     }
+    recursion(n, 0, 0);
+    console.log(count.join("\n"));
+};
 
-    console.log(arr.every(isBelowThreshold));
-}
-
-
-console.log(arr)
-solution(arr)
+countPaper(N);
