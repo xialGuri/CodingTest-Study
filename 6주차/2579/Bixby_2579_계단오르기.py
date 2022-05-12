@@ -2,10 +2,8 @@ n=int(input())
 step=[int(input())for _ in range(n)]
 dp=[0]*n
 
-if n==1:
-    print(step[0])
-elif n==2:
-    print(step[0]+step[1])
+if n<3:
+    print(sum(step))
 else:
     dp[0]=step[0]
     dp[1]=step[0]+step[1]
