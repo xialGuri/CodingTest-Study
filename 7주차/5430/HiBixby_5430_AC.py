@@ -12,6 +12,6 @@ for _ in range(int(input())):#테스트 케이스 개수 T 만큼 반복
             if p=="R": #함수 R이면 flag변수 토글
                 step*=-1
             else: #함수 D일때 정방향이면 popleft 뒤집힌 방향이면 pop
-                q.pop() if step==-1 else q.popleft()
+                q.popleft()if step==1 else q.pop()
 
         print(str(list(q)[::step]).replace(" ","")) #명령 수행후 바뀐 배열 출력
