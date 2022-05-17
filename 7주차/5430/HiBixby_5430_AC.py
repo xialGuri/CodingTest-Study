@@ -7,9 +7,9 @@ for _ in range(int(input())):
         step=1
         for p in c:
             if p=="R":
-            	step*=-1
+                step*=-1
             else:
-            	q.popleft() if step==1 else q.pop()
+                q.popleft() if step==1 else q.pop()
         print(str(list(q)[::step]).replace(" ",""))
     except:
     	print('error')
