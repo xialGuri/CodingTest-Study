@@ -1,29 +1,40 @@
 import sys
-from collections import deque
+
 input = sys.stdin.readline
-T = int(input())
-result = []
-for _ in range(T):
-    p = input().rstrip()
-    length = int(input())
-    strr = input().rstrip()
-    if strr == "[]":
-        arr = []
+
+N = int(input())
+
+M = int(input())
+
+s = list(input().rstrip())
+
+stack = []
+cnt = 0
+result = 0
+for i in s:
+    if not stack:
+        if i == "I":
+            stack.append(i)
+            cnt+=1
+            continue
+        continue
+    if i != stack[-1]:
+        stack.append(i)
+        cnt+=1
     else:
-        arr = deque(list(strr[1:-1].split(",")))
-    state = False
-    for i in range(len(p)):
-        if p[i] == "R":
-            state = not state
-        elif p[i] == "D":
-            if not arr:
-                print("error")
-                break
-            if state:
-                arr.pop()
-            else:
-                arr.popleft()
-    else:
-        if state:
-            arr.reverse()
-        print("["+",".join(arr)+"]")
+        temp = (cnt-(2*(N-1)+1)) // 2
+        if temp >0:
+            result += temp
+        if i == "I":
+            stack = [i]
+            cnt = 1
+        else:
+            stack = []
+            cnt = 0
+if cnt >= 0:
+    temp = (cnt - (2 * (N - 1) + 1)) // 2
+    if temp > 0:
+        result += temp
+print(result)
+
+
