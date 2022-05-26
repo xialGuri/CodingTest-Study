@@ -13,3 +13,24 @@
 #출력
 #각 테스트 케이스에 대해 해빈이가 알몸이 아닌 상태로 의상을 입을 수 있는 경우를 출력하시오
 
+n = int(input())
+# test case
+for _ in range(n):
+    _n = int(input())
+
+    # each case
+    clothes_type = {}
+    for _ in range(_n):
+        # 의류 이름과 종류
+        name, type = input().split()
+        if(type in clothes_type):
+            clothes_type[type] += 1
+        else:
+            clothes_type[type] = 1
+
+    case = 1
+    # 옷의 종류 + 1
+    for key in clothes_type.keys():
+        case = case * (clothes_type[key] + 1)
+
+    print(case - 1)
